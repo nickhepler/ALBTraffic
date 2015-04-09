@@ -21,7 +21,9 @@ Annual Average Daily Traffic (AADT) is an estimate of the average daily traffic 
 #### [511 NY Events: Beginning 2010](https://data.ny.gov/api/views/ah74-pg4w/rows.csv?accessType=DOWNLOAD) ####
 The 511NY dataset contain historical traffic and transit event information provided by the New York State Department of Transportation (NYSDOT), the New York City Department of Transportation, the New York State Thruway Authority and the Niagara International Transportation Technology Coalition (Buffalo-Niagara Region). The file includes all incidents/accidents, construction projects and special events in New York State that were available on the 511NY traffic and transit map for the time period noted.
 
-### Tidy Data ###
+### Formatted Data ###
+#### Summary ####
+In order to ensure that the source data can be easily shared, computed, and analyzed, the data was processed and formatted using the R language and environment for statistical computing and graphics. The following is a brief summary of the changes made to produce the final formatted files. The complete R script is available [here]. 
 
 ## Results ##
 
