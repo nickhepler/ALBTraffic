@@ -6,9 +6,11 @@ _Nick Hepler, [University at Albany](http://www.albany.edu), [College of Computi
 
 ## Project Objectives ##
 1.  Perform a descriptive analysis of the data.
+1.  Identify the most likely and least times in which a motorist would be involved in a traffic accident.
+1.  Identify the most likely and least days in which a motorist would be involved in a traffic accident.
 1.  Identify the thoroughfares that have the most and least number of accidents.
 1.  Identify the thoroughfares that have the most and least number of accidents per 1,000 travelers.
-1.  Identify the most likely and least times in which a motorist would be involved in a traffic accident.
+
 
 ## Methodology ##
 
