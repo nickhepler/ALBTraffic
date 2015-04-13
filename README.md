@@ -35,6 +35,7 @@ In order to ensure that the source data can be easily shared, computed, and anal
 ## Addendum ##
 ### Required CRAN Packages ###
 The following packages are required in order to perform computations or perform the scripting for the creation of the tidy data set.
+* ['dplyr': A Grammar of Data Manipulation](http://cran.r-project.org/web/packages/dplyr/index.html)
 
 ### Project Resources ###
 #### Source Data Dictionaries ####
