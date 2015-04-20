@@ -1,6 +1,6 @@
 #  format_data_windows.R
 #
-#  Version 0.0.1
+#  Version 0.0.2
 #
 #  Copyright 2015 Nick Hepler <nhepler@albany.edu>
 #
@@ -20,44 +20,46 @@
 #  MA 02110-1301, USA.
 #
 #
-if (!file.exists("ALBTraffic")) {
-  dir.create("ALBTraffic")
+library("dplyr")
+
+if (!file.exists("data")) {
+  dir.create("data")
 }
-#  Download AADT data
-file.aadt.url <- "https://data.ny.gov/api/views/6amx-2pbv/rows.csv?accessType=DOWNLOAD"
-download.file(file.aadt.url,
-  destfile = "./ALBTraffic/Annual_Average_Daily_Traffic__AADT___Beginning_1977.csv")
-file.aadt.timestamp <- date()
-rm(file.aadt.url)
 
-#  Download 511 data
-file.511.url <- "https://data.ny.gov/api/views/ah74-pg4w/rows.csv?accessType=DOWNLOAD"
-download.file(file.511.url,
-  destfile = "./ALBTraffic/511_NY_Events_Beginning_2010.csv", method = "wb")
-file.511.timestamp <- date()
-rm(file.511.url)
+OutputFile <- file("output.txt") #  Create output file.
 
-#  Download motor vehicle crash data
-file.mva.url <- "https://data.ny.gov/api/views/ah74-pg4w/rows.csv?accessType=DOWNLOAD"
-download.file(file.511.url,
-  destfile = "./ALBTraffic/Motor_Vehicle_Crashes_-_Case_Information__Beginning_2009", method = "wb")
-file.mva.timestamp <- date()
-rm(file.mva.url)
+#  Set URL and destination of file to download
+file.mva.url <- "https://data.ny.gov/api/views/e8ky-4vqe/rows.csv?accessType=DOWNLOAD"
+file.mva.dest <- "./data/Motor_Vehicle_Crashes_-_Case_Information__Beginning_2009.csv"
 
-list.files("./ALBTraffic")
+download.file(file.mva.url,
+              destfile = file.mva.dest, 
+              method = "wb") #  Download motor vehicle crash data
+
+file.mva.timestamp <- date() #  Write timestamp
+
+writeLines(c("Downloaded AADT data :: ",
+             file.mva.timestamp),
+           OutputFile) #  Write timestamp to output file.
+close(OutputFile)
+
+#  Remove temporary variables from environment.
+rm(file.mva.url, file.mva.dest, file.mva.timestamp)
+
+list.files("./data") #  List files.
 
 #  Load data into global environment, REMOVE once tidy data has been scripted
 #  and tested.
-raw.aadt <- read.csv(
-  "~/ALBTraffic/Annual_Average_Daily_Traffic__AADT___Beginning_1977.csv")
-raw.ny511 <- read.csv(
-  "~/ALBTraffic/511_NY_Events_Beginning_2010.csv")
 raw.mva <- read.csv(
-  "~/ALBTraffic/Motor_Vehicle_Crashes_-_Case_Information__Beginning_2009.csv")
+  "./data/Motor_Vehicle_Crashes_-_Case_Information__Beginning_2009.csv",
+  stringsAsFactors=FALSE)
 
 #  Format the data.
 #  Convert Date variable from factor to date data type.
 raw.mva$Date <- as.Date(raw.mva$Date, "%m/%d/%Y")
+raw.mva$Crash.Descriptor <- as.factor(raw.mva$Crash.Descriptor)
+raw.mva$Day.of.Week <- as.factor(raw.mva$Day.of.Week)
+raw.mva <- subset(raw.mva, Municipality == "ALBANY")
 
 #  Subset the data.
-aadt <- subset(raw.aadt, Municipality == "CITY OF ALBANY")
+mva <- tbl_df(raw.mva)
