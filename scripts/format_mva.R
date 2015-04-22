@@ -1,6 +1,6 @@
 #  format_mva.R
 #
-#  Version 0.1.0
+#  Version 0.2.0
 #
 #  Copyright 2015 Nick Hepler <nhepler@albany.edu>
 #
@@ -21,6 +21,30 @@
 #
 #
 library("dplyr")
+
+#  Summarize & review data
+print(head(raw.mva,n=3)) #  Review first 3 observations.
+print(tail(raw.mva,n=3)) #  Review last 3 observations.
+
+print(summary(raw.mva))
+
+print(str(raw.mva))
+
+print(quantile(raw.mva$Number.of.Vehicles.Involved,na.rm=TRUE))
+
+# Create Data Tables to review.
+print(table(raw.mva$Crash.Descriptor,useNA="ifany"))
+print(table(raw.mva$Day.of.Week,useNA="ifany"))
+print(table(raw.mva$Lighting.Conditions,useNA="ifany"))
+print(table(raw.mva$Collision.Type.Descriptor,useNA="ifany"))
+print(table(raw.mva$Road.Descriptor,useNA="ifany"))
+print(table(raw.mva$Weather.Conditions,useNA="ifany"))
+print(table(raw.mva$Traffic.Control.Device,useNA="ifany"))
+print(table(raw.mva$Road.Surface.Conditions,useNA="ifany"))
+print(table(raw.mva$Event.Descriptor,useNA="ifany"))
+print(table(raw.mva$Number.of.Vehicles.Involved,useNA="ifany"))
+
+print(all(colSums(is.na(raw.mva))==0)) # Check for NA values in data.
 
 #  Format the data.
 raw.mva$Date <- as.Date(raw.mva$Date, "%m/%d/%Y")
