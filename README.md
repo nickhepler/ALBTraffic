@@ -3,6 +3,7 @@ __An exploratory statistical analysis of traffic in the City of Albany, New York
 
 ## Authors ##
 _Nick Hepler, [University at Albany](http://www.albany.edu), [College of Computing & Information](http://www.albany.edu/cci/)_
+
 _Julia Turner, [University at Albany](http://www.albany.edu), [College of Computing & Information](http://www.albany.edu/cci/)_
 
 ## Project Objectives ##
