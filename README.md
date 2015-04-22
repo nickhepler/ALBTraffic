@@ -26,6 +26,7 @@ Motor Vehicle Crashes - Case Information is one of four data sets related to mot
 ### Formatted Data ###
 #### Summary ####
 In order to ensure that the source data can be easily shared, computed, and analyzed, the data was processed and formatted using the R language and environment for statistical computing and graphics. The following is a brief summary of the changes made to produce the final formatted files.
+
 1.  Data was downloaded, subset (to avoid GitHub upload limit), and saved to a new CSV file. To replicate, Windows users should user this [script](https://github.com/nickhepler/ALBTraffic/blob/master/scripts/download_mva_windows.R) whiles Linux & Mac users should use this [script](https://github.com/nickhepler/ALBTraffic/blob/master/scripts/download_mva_linux.R)
 
 1.  The data was then sourced through the [format script](https://github.com/nickhepler/ALBTraffic/blob/master/scripts/format_mva.R) to perform a cursory review and format the data in order to complete statistical analysis.
