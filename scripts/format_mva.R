@@ -1,6 +1,6 @@
 #  format_mva.R
 #
-#  Version 0.2.0
+#  Version 0.3.0
 #
 #  Copyright 2015 Nick Hepler <nhepler@albany.edu>
 #
@@ -49,10 +49,18 @@ print(all(colSums(is.na(raw.mva))==0)) # Check for NA values in data.
 #  Format the data.
 raw.mva$Date <- as.Date(raw.mva$Date, "%m/%d/%Y")
 raw.mva$Crash.Descriptor <- as.factor(raw.mva$Crash.Descriptor)
-raw.mva$Day.of.Week <- as.factor(raw.mva$Day.of.Week)
+raw.mva$Day.of.Week <- as.factor(raw.mva$Day.of.Week,
+  levels=c())
+
+#  Remove Municipality, County.Name, DOT.Reference.Marker.Location
+#  GREP (AM, PM)
 
 #  Load data frame to dplyr.
+raw.mva <- tbl_df(raw.mva)
+
+
 mva <- tbl_df(raw.mva)
+
 
 num2009 <- sum(with(mva, Year == 2009))
 num2010 <- sum(with(mva, Year == 2010))
