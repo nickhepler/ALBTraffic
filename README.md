@@ -1,20 +1,25 @@
-# Traffic Analysis for the City of Albany #
-__An exploratory statistical analysis of traffic in the City of Albany, New York__
+# Albany Traffic Crashes#
+__Exploratory Analysis of Motor Vehicle Crashes for the City of Albany, New York__
 
 ## Authors ##
 _Nick Hepler, [University at Albany](http://www.albany.edu), [College of Computing & Information](http://www.albany.edu/cci/)_
 
 _Julia Turner, [University at Albany](http://www.albany.edu), [College of Computing & Information](http://www.albany.edu/cci/)_
 
-## Project Objectives ##
+## Project Objectives & Questions Evaluated ##
+This source data set is one of four parts of the Motor Vehicle Crash information. The specific data set used was the motor vehicle crash information which contains data related to the date and time of the accident, a description of the accident, road & weather conditions, number of vehicles involved, and other information. Each observation represents a single motorist accident report. NYS Vehicle and Traffic Law requires parties involved in a motor vehicle accident to file a report with police or complete Form MV-104 (Report of Motor Vehicle Accident) if any of the following conditions are met:
+* If the property damage of any person is $1,001 or more;
+* or if the motor vehicle accident results in an individual being injured or killed.
+
+Utilizing this data set, a descriptive analysis along with hypotheses testing was conducted to answer the following questions:
+
 1.  Perform a descriptive analysis of the data.
 1.  Identify the most likely and least times in which a motorist would be involved in a traffic accident.
 1.  Identify the most likely and least days in which a motorist would be involved in a traffic accident.
-1.  Identify the thoroughfares that have the most and least number of accidents.
-1.  Identify the thoroughfares that have the most and least number of accidents per 1,000 travelers.
-
+1.  Are motorists are more likely to be involved in a motor vehicle accident during evening rush hour than any other time of day.
 
 ## Methodology ##
+The source data was obtained through the New York State Open Data website furnished by the State of New York, Office if Information Technology Services. The original data can be found on the New York State Open Data website linked in the Source Data section below.
 
 ## Data ##
 ### Source Data ###
@@ -37,6 +42,7 @@ In order to ensure that the source data can be easily shared, computed, and anal
 ### Required CRAN Packages ###
 The following packages are required in order to perform computations or perform the scripting for the creation of the tidy data set.
 * [`dplyr`: A Grammar of Data Manipulation](http://cran.r-project.org/web/packages/dplyr/index.html)
+* [`chron`: Chronological objects which can handle dates and times](http://cran.r-project.org/web/packages/chron/index.html)
 
 ### Project Resources ###
 #### Source Data Dictionaries ####
