@@ -1,6 +1,6 @@
 #  format_mva.R
 #
-#  Version 0.4.0
+#  Version 0.5.0
 #
 #  Copyright 2015 Nick Hepler <nhepler@albany.edu>
 #
@@ -54,7 +54,7 @@ raw.mva$Crash.Descriptor <- factor(raw.mva$Crash.Descriptor,
 raw.mva$Day.of.Week <- factor(raw.mva$Day.of.Week,
   levels=c("Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday",
   "Saturday"))
-  raw.mva$Lighting.Conditions <- factor(raw.mva$Lighting.Conditions,
+raw.mva$Lighting.Conditions <- factor(raw.mva$Lighting.Conditions,
   levels=c("Dawn", "Daylight", "Dusk", "Dark-Road Lighted",
   "Dark-Road Unlighted", "Unknown"))
 raw.mva$Weather.Conditions <- factor(raw.mva$Weather.Conditions,
@@ -64,9 +64,6 @@ raw.mva$Time <- format(strptime(raw.mva$Time, "%I:%M %p"), format="%H:%M:%S")
 
 View(raw.mva)
 
-#  Remove Municipality, County.Name, DOT.Reference.Marker.Location
-#  GREP (AM, PM)
-
 #  Load data frame to dplyr.
 raw.mva <- tbl_df(raw.mva)
 raw.mva <- select(raw.mva, -(X))
@@ -74,20 +71,10 @@ raw.mva <- select(raw.mva, -(County.Name))
 raw.mva <- select(raw.mva, -(Municipality))
 raw.mva <- select(raw.mva, -(DOT.Reference.Marker.Location))
 
+#  Create final tidy data set.
 mva <- tbl_df(raw.mva)
-
-num2009 <- sum(with(mva, Year == 2009))
-num2010 <- sum(with(mva, Year == 2010))
-num2011 <- sum(with(mva, Year == 2011))
-num2012 <- sum(with(mva, Year == 2012))
-
-mva.2009 <- filter(mva, Year == 2009)
-mva.2010 <- filter(mva, Year == 2010)
-mva.2011 <- filter(mva, Year == 2011)
-mva.2012 <- filter(mva, Year == 2012)
 
 #  Clean up variables.
 rm(raw.mva)
 
-#  Unload dplyr package.
-detach("package:dplyr", unload=TRUE)
+source("./scripts/analyze_mva.R")
