@@ -1,6 +1,6 @@
 #  format_mva.R
 #
-#  Version 0.3.0
+#  Version 0.4.0
 #
 #  Copyright 2015 Nick Hepler <nhepler@albany.edu>
 #
@@ -46,21 +46,35 @@ print(table(raw.mva$Number.of.Vehicles.Involved,useNA="ifany"))
 
 print(all(colSums(is.na(raw.mva))==0)) # Check for NA values in data.
 
-#  Format the data.
+#  Modify variables to data objects.
 raw.mva$Date <- as.Date(raw.mva$Date, "%m/%d/%Y")
-raw.mva$Crash.Descriptor <- as.factor(raw.mva$Crash.Descriptor)
-raw.mva$Day.of.Week <- as.factor(raw.mva$Day.of.Week,
-  levels=c())
+raw.mva$Crash.Descriptor <- factor(raw.mva$Crash.Descriptor,
+  levels=c("Property Damage Accident", "Injury Accident",
+  "Property Damage & Injury Accident", "Fatal Accident"))
+raw.mva$Day.of.Week <- factor(raw.mva$Day.of.Week,
+  levels=c("Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday",
+  "Saturday"))
+  raw.mva$Lighting.Conditions <- factor(raw.mva$Lighting.Conditions,
+  levels=c("Dawn", "Daylight", "Dusk", "Dark-Road Lighted",
+  "Dark-Road Unlighted", "Unknown"))
+raw.mva$Weather.Conditions <- factor(raw.mva$Weather.Conditions,
+  levels=c("Clear", "Cloudy", "Fog/Smog/Smoke", "Rain", "Snow",
+  "Sleet/Hail/Freezing Rain", "Other*", "Unknown"))
+raw.mva$Time <- format(strptime(raw.mva$Time, "%I:%M %p"), format="%H:%M:%S")
+
+View(raw.mva)
 
 #  Remove Municipality, County.Name, DOT.Reference.Marker.Location
 #  GREP (AM, PM)
 
 #  Load data frame to dplyr.
 raw.mva <- tbl_df(raw.mva)
-
+raw.mva <- select(raw.mva, -(X))
+raw.mva <- select(raw.mva, -(County.Name))
+raw.mva <- select(raw.mva, -(Municipality))
+raw.mva <- select(raw.mva, -(DOT.Reference.Marker.Location))
 
 mva <- tbl_df(raw.mva)
-
 
 num2009 <- sum(with(mva, Year == 2009))
 num2010 <- sum(with(mva, Year == 2010))
